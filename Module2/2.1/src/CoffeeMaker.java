@@ -1,16 +1,16 @@
 import java.util.Scanner;
 
 public class CoffeeMaker {
-    final String normalCoffee = "normal coffee";
-    final String espresso = "espresso";
-    final int MIN_AMOUNT = 10;
-    final int MAX_AMOUNT = 80;
-    boolean isOn = false;
-    String coffeeType;
-    int selection;
-    int selectionAmount;
-    int increaseOrDecrease;
-    int amount = 35;
+    final private String normalCoffee = "normal coffee";
+    final private String espresso = "espresso";
+    final private int MIN_AMOUNT = 10;
+    final private int MAX_AMOUNT = 80;
+    private boolean isOn = false;
+    private String coffeeType;
+    private int selection;
+    private int selectionAmount;
+    private int increaseOrDecrease;
+    private int amount = 35;
 
     Scanner input = new Scanner(System.in);
 
