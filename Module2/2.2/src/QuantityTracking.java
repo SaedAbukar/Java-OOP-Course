@@ -3,7 +3,7 @@ import java.util.Map;
 
 public class QuantityTracking {
     public static void main(String[] args) {
-        GroceryList1 groceryListManager = new GroceryList1();
+        GroceryListManager groceryListManager = new GroceryListManager();
 
         groceryListManager.addItem("Apple", 1, "Fruits", 2);
         groceryListManager.addItem("Milk", 2, "Dairy", 2);

@@ -3,6 +3,7 @@ import java.util.Objects;
 
 public class GroceryList1 {
     private HashMap<String, HashMap<String, HashMap<Double, Integer>>> groceryList = new HashMap<>();
+    private ShoppingList shoppingList = new ShoppingList();
     private double totalPrice;
     private String fruits = "Fruits";
     private String dairy = "Dairy";
@@ -112,4 +113,5 @@ public class GroceryList1 {
         }
         return updatedQuantity;
     }
+
 }
