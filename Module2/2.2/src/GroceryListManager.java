@@ -1,59 +1,37 @@
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class GroceryListManager {
-    private ArrayList<String> groceryList = new ArrayList<>();
+    private HashMap<String, Double> groceryList = new HashMap<>();
+    private double totalPrice;
 
-    public void addItem(String item) {
-        if (groceryList.contains(item)) {
+    public void addItem(String item, double price) {
+        if (groceryList.containsKey(item)) {
             return;
         } else {
-            groceryList.add(item);
+            groceryList.put(item, price);
         }
     }
 
     public void removeItem(String item) {
-        if (groceryList.contains(item)) {
+        if (groceryList.containsKey(item)) {
             groceryList.remove(item);
         } else {
             return;
         }
     }
 
-    public ArrayList<String> displayList() {
+    public HashMap<String, Double> displayList() {
         return groceryList;
     }
 
     public boolean checkItem(String item) {
-        return groceryList.contains(item);
+        return groceryList.containsKey(item);
     }
 
-    public static void main(String[] args) {
-        GroceryListManager groceryListManager = new GroceryListManager();
-
-        String[] items = {"Apple", "Orange", "Banana"};
-
-        for (String item : items) {
-            groceryListManager.addItem(item);
+    public double calculateCost() {
+        for (Double price : groceryList.values()) {
+            totalPrice += price;
         }
-
-        System.out.println("Grocery List:");
-
-        int i = 1;
-        for (String item : groceryListManager.displayList()) {
-            System.out.printf("%d. %s%n", i, item);
-            i++;
-        }
-        System.out.println(" ");
-        System.out.printf("Is \"Apple\" in the grocery list? %s%n", groceryListManager.checkItem("Apple"));
-        System.out.println(" ");
-        System.out.println("Removing \"Apple\" from the list...");
-        groceryListManager.removeItem("Apple");
-        System.out.println(" ");
-        System.out.println("Updated Grocery List:");
-        i = 1;
-        for (String item : groceryListManager.displayList()) {
-            System.out.printf("%d. %s%n", i, item);
-            i++;
-        }
+        return totalPrice;
     }
 }
