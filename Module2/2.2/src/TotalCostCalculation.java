@@ -1,6 +1,6 @@
 import java.util.Map;
 
-public class CategorizingItems {
+public class TotalCostCalculation {
     public static void main(String[] args) {
         GroceryListManager groceryListManager = new GroceryListManager();
 
