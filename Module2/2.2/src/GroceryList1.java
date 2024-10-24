@@ -1,7 +1,7 @@
 import java.util.HashMap;
 import java.util.Objects;
 
-public class GroceryListManager {
+public class GroceryList1 {
     private HashMap<String, HashMap<String, HashMap<Double, Integer>>> groceryList = new HashMap<>();
     private double totalPrice;
     private String fruits = "Fruits";
