@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Module1/1.1/1.1.iml" filepath="$PROJECT_DIR$/Module1/1.1/1.1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Module1/1.2/1.2.iml" filepath="$PROJECT_DIR$/Module1/1.2/1.2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Module1/1.3/1.3.iml" filepath="$PROJECT_DIR$/Module1/1.3/1.3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Module1/1.4/1.4.iml" filepath="$PROJECT_DIR$/Module1/1.4/1.4.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Module2/2.1/2.1.iml" filepath="$PROJECT_DIR$/Module2/2.1/2.1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Module2/2.2/2.2.iml" filepath="$PROJECT_DIR$/Module2/2.2/2.2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Module2/2.3/2.3.iml" filepath="$PROJECT_DIR$/Module2/2.3/2.3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Module1/Module1.iml" filepath="$PROJECT_DIR$/Module1/Module1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Module2/Module2.iml" filepath="$PROJECT_DIR$/Module2/Module2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/OOP-CourseMaterial.iml" filepath="$PROJECT_DIR$/OOP-CourseMaterial.iml" />
+    </modules>
+  </component>
+</project>

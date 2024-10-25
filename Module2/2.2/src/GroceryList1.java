@@ -1,91 +1,51 @@
 import java.util.HashMap;
-import java.util.Objects;
 
 public class GroceryList1 {
-    private HashMap<String, HashMap<String, HashMap<Double, Integer>>> groceryList = new HashMap<>();
-    private ShoppingList shoppingList = new ShoppingList();
+    private HashMap<String, ShoppingList> groceryList = new HashMap<>();
     private double totalPrice;
     private String fruits = "Fruits";
     private String dairy = "Dairy";
     private String bakery = "Bakery";
 
-    public void addItem(String name, double price, String category, int quantity) {
-        if (!Objects.equals(category, fruits) && !Objects.equals(category, dairy) && !Objects.equals(category, bakery)) {
-            return;
-        }
-        if (groceryList.containsKey(category)) {
-            if (groceryList.get(category).containsKey(name)) {
-                groceryList.get(category).get(name).put(price, quantity);
-            } else {
-                HashMap<String, HashMap<Double, Integer>> map = new HashMap<>();
-                HashMap<Double, Integer> item = new HashMap<>();
-                item.put(price, quantity);
-                map.put(name, item);
-            }
-            ;
-        } else {
-            HashMap<String, HashMap<Double, Integer>> map = new HashMap<>();
-            HashMap<Double, Integer> item = new HashMap<>();
-            item.put(price, quantity);
-            map.put(name, item);
-            groceryList.put(category, map);
+    public void addItem(String category, ShoppingList shoppingList) {
+        if (!groceryList.containsKey(category)) {
+            groceryList.put(category, shoppingList);
         }
     }
 
-    public void removeItem(String item) {
-        String itemMatch = "";
-        String categoryMatch = "";
-        boolean found = false;
-        for (String category : groceryList.keySet()) {
-            for (String name : groceryList.get(category).keySet()) {
-                if (name.equals(item)) {
-                    itemMatch = name;
-                    categoryMatch = category;
-                    found = true;
-                }
-            }
-        }
-        if (found) {
-            groceryList.get(categoryMatch).remove(itemMatch);
-        }
+    public void removeItem(String category) {
+        groceryList.remove(category);
     }
 
-    public HashMap<String, HashMap<String, HashMap<Double, Integer>>> displayList() {
+    public HashMap<String, ShoppingList> displayList() {
         return groceryList;
     }
 
-    public boolean checkItem(String item) {
-        boolean found = false;
-        for (String category : groceryList.keySet()) {
-            for (String name : groceryList.get(category).keySet()) {
-                if (name.equals(item)) {
-                    found = true;
-                }
-            }
-        }
-        return found;
+    public boolean checkItem(String category) {
+        return groceryList.containsKey(category);
     }
 
     public double calculateCost() {
         totalPrice = 0;
-        double total = 0;
         for (String category : groceryList.keySet()) {
-            for (String name : groceryList.get(category).keySet()) {
-                HashMap<Double, Integer> map = groceryList.get(category).get(name);
-                for (Double price : map.keySet()) {
-                    total += price;
+            HashMap<String, HashMap<Double, Integer>> item = groceryList.get(category).displayList();
+            for (String itemCategory : item.keySet()) {
+                double currentPrice = 0;
+                int currentQuantity = 0;
+                HashMap<Double, Integer> itemPrice = item.get(itemCategory);
+                for (Double price : itemPrice.keySet()) {
+                    currentPrice = price;
                 }
-                for (Integer quantity : map.values()) {
-                    total *= quantity;
+                for (Integer quantity : itemPrice.values()) {
+                    currentQuantity = quantity;
                 }
-                totalPrice += total;
-
+                totalPrice += currentPrice * currentQuantity;
             }
         }
         return totalPrice;
     }
 
-    public HashMap<String, HashMap<Double, Integer>> displayCategory(String category) {
+    public ShoppingList displayCategory(String category) {
         return groceryList.get(category);
     }
 
@@ -95,7 +55,7 @@ public class GroceryList1 {
         String categoryMatch = "";
         boolean found = false;
         for (String category : groceryList.keySet()) {
-            for (String name : groceryList.get(category).keySet()) {
+            for (String name : groceryList.get(category).displayList().keySet()) {
                 if (name.equals(item)) {
                     found = true;
                     itemMatch = name;
@@ -105,7 +65,7 @@ public class GroceryList1 {
             }
         }
         if (found) {
-            HashMap<Double, Integer> map = groceryList.get(categoryMatch).get(itemMatch);
+            HashMap<Double, Integer> map = groceryList.get(categoryMatch).displayList().get(itemMatch);
             double price = map.keySet().iterator().next();
             int currentQuantity = map.values().iterator().next();
             updatedQuantity = currentQuantity + newQuantity;
