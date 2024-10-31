@@ -3,7 +3,37 @@ import java.util.HashMap;
 
 public class Library {
     private ArrayList<Book> books2 = new ArrayList<>();
+    private ArrayList<User> users = new ArrayList<>();
     private HashMap<String, Book> books = new HashMap<>();
+
+    public void addUser(User user) {
+        if (!users.contains(user)) {
+            users.add(user);
+        }
+    }
+
+    public void removeUser(User user) {
+        User matchingUser = null;
+        boolean found = false;
+        for (User u : users) {
+            if (u.equals(user)) {
+                found = true;
+                matchingUser = u;
+            }
+        }
+        if (found) {
+            users.remove(matchingUser);
+        }
+    }
+
+    public User getUser(String name) {
+        for (User user : users) {
+            if (user.getName().equals(name)) {
+                return user;
+            }
+        }
+        return null;
+    }
 
     public void addBook(Book book) {
         books2.add(book);
@@ -71,7 +101,10 @@ public class Library {
             double rating = book.getRating();
             sum += rating;
         }
-        return sum / books2.size();
+        if (!books2.isEmpty()) {
+            return sum / books2.size();
+        }
+        return 0;
     }
 
     public Book getMostReviewedBook() {
