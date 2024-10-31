@@ -56,4 +56,12 @@ public class Library {
         return book;
     }
 
+    public boolean isBookAvailable(String title) {
+        for (Book book : books2) {
+            if (book.getTitle().equals(title)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
