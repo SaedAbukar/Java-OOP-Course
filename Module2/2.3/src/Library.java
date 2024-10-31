@@ -40,4 +40,20 @@ public class Library {
     public HashMap<String, Book> getBooks() {
         return books;
     }
+
+    public Book borrowBook(String title) {
+        for (Book book : books2) {
+            if (book.getTitle().equals(title)) {
+                books2.remove(book);
+                return book;
+            }
+        }
+        return null;
+    }
+
+    public Book returnBook(Book book) {
+        books2.add(book);
+        return book;
+    }
+
 }
