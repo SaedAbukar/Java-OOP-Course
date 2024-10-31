@@ -64,4 +64,26 @@ public class Library {
         }
         return false;
     }
+
+    public double getAverageRating() {
+        double sum = 0;
+        for (Book book : books2) {
+            double rating = book.getRating();
+            sum += rating;
+        }
+        return sum / books2.size();
+    }
+
+    public Book getMostReviewedBook() {
+        int max = 0;
+        Book mostReviewedBook = null;
+        for (Book book : books2) {
+            int count = book.getReviewCount();
+            if (count > max) {
+                max = count;
+                mostReviewedBook = book;
+            }
+        }
+        return mostReviewedBook;
+    }
 }

@@ -4,6 +4,7 @@ public class Book {
     private int year;
     private double rating;
     private String review;
+    private int reviewCount;
 
     Book(String title, String author, int year) {
         this.title = title;
@@ -33,10 +34,15 @@ public class Book {
 
     public void setReview(String review) {
         this.review = review;
+        reviewCount++;
     }
 
     public String getReview() {
         return review;
+    }
+
+    public int getReviewCount() {
+        return reviewCount;
     }
 
     public String toString() {
