@@ -4,4 +4,6 @@ public interface Vehicle {
     public void stop();
 
     public void getInfo();
+
+    public double calculateFuelEfficiency();
 }

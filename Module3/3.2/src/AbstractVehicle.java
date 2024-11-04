@@ -1,27 +1,30 @@
 public class AbstractVehicle implements Vehicle, ElectricVehicle {
-    protected String type;
-    protected String fuel;
-    protected String color;
-    protected boolean engine = false;
-    protected double price;
-    protected double speed;
-    protected double batteryCapacity;
-    protected final int MAXBATTERYCAPACITY = 100;
-    protected final int MINBATTERYCAPACITY = 0;
-    protected double chargeSpeed;
-    protected double range;
+    private String type;
+    private String fuel;
+    private String color;
+    private boolean engine = false;
+    private double price;
+    private double speed;
+    private double batteryCapacity;
+    private final int MAXBATTERYCAPACITY = 100;
+    private final int MINBATTERYCAPACITY = 0;
+    private double chargeSpeed;
+    private double range;
+    private double fuelEfficiency;
+    private double batteryEfficiency;
 
 
-    public AbstractVehicle(String type, String fuel, String color, boolean engine, double price, double speed) {
+    public AbstractVehicle(String type, String fuel, String color, boolean engine, double price, double speed, double fuelEfficiency) {
         this.type = type;
         this.fuel = fuel;
         this.color = color;
         this.engine = engine;
         this.price = price;
         this.speed = speed;
+        this.fuelEfficiency = fuelEfficiency;
     }
 
-    public AbstractVehicle(String type, String color, boolean engine, double price, double speed, double batteryCapacity, double chargeSpeed) {
+    public AbstractVehicle(String type, String color, boolean engine, double price, double speed, double batteryCapacity, double chargeSpeed, double batteryEfficiency) {
         this.type = type;
         this.color = color;
         this.engine = engine;
@@ -29,6 +32,7 @@ public class AbstractVehicle implements Vehicle, ElectricVehicle {
         this.speed = speed;
         this.batteryCapacity = batteryCapacity;
         this.chargeSpeed = chargeSpeed;
+        this.batteryEfficiency = batteryEfficiency;
     }
 
     public double getPrice() {
@@ -70,6 +74,14 @@ public class AbstractVehicle implements Vehicle, ElectricVehicle {
             System.out.println("Not possible to charge");
         } else {
             System.out.println("Charging...");
+        }
+    }
+
+    public double calculateFuelEfficiency() {
+        if (type.equals("Electric")) {
+            return batteryEfficiency;
+        } else {
+            return fuelEfficiency;
         }
     }
 }
