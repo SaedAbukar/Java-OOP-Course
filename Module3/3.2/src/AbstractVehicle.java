@@ -24,8 +24,9 @@ public class AbstractVehicle implements Vehicle, ElectricVehicle {
         this.fuelEfficiency = fuelEfficiency;
     }
 
-    public AbstractVehicle(String type, String color, boolean engine, double price, double speed, double batteryCapacity, double chargeSpeed, double batteryEfficiency) {
+    public AbstractVehicle(String type, String fuel, String color, boolean engine, double price, double speed, double batteryCapacity, double chargeSpeed, double batteryEfficiency) {
         this.type = type;
+        this.fuel = fuel;
         this.color = color;
         this.engine = engine;
         this.price = price;
@@ -43,10 +44,18 @@ public class AbstractVehicle implements Vehicle, ElectricVehicle {
         return speed;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public String getFuel() {
+        return fuel;
+    }
+
     @Override
     public void getInfo() {
         System.out.printf("%s Information%n", type);
-        if (type.equals("Electric")) {
+        if (fuel.equals("Electric")) {
             System.out.printf("Type: %s%nBatterCapacity: %.2f%nRange: %.0f%nCharging speed: %.0f%nColor: %s%n", type, batteryCapacity, range, chargeSpeed, color);
         } else {
             System.out.printf("Type: %s%nFuel: %s%nColor: %s%n", type, fuel, color);
@@ -70,7 +79,7 @@ public class AbstractVehicle implements Vehicle, ElectricVehicle {
     }
 
     public void charge() {
-        if (!type.equals("Electric")) {
+        if (!fuel.equals("Electric")) {
             System.out.println("Not possible to charge");
         } else {
             System.out.println("Charging...");
@@ -78,7 +87,7 @@ public class AbstractVehicle implements Vehicle, ElectricVehicle {
     }
 
     public double calculateFuelEfficiency() {
-        if (type.equals("Electric")) {
+        if (fuel.equals("Electric")) {
             return batteryEfficiency;
         } else {
             return fuelEfficiency;
