@@ -1,34 +1,14 @@
-public class Bus implements Vehicle {
-    private String type;
-    private String fuel;
+public class Bus extends AbstractVehicle {
     private int capacity;
-    private boolean engine = false;
 
-    public Bus(String type, String fuel, int capacity) {
-        this.type = type;
-        this.fuel = fuel;
+    public Bus(String type, String color, String fuel, Boolean engine, int capacity, double price, double speed) {
+        super(type, fuel, color, engine, price, speed);
         this.capacity = capacity;
     }
 
     @Override
     public void getInfo() {
-        System.out.println("Bus Information:");
-        System.out.printf("Type: %s%nFuel: %s%nCapacity: %d passengers%n", type, fuel, capacity);
-    }
-
-    @Override
-    public void start() {
-        if (!engine) {
-            engine = true;
-            System.out.println("Bus is starting...");
-        }
-    }
-
-    @Override
-    public void stop() {
-        if (engine) {
-            engine = false;
-            System.out.println("Bus is stopping...");
-        }
+        super.getInfo();
+        System.out.printf("Capacity: %d passengers%n", capacity);
     }
 }
