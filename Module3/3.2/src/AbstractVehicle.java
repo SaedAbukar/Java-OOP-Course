@@ -1,4 +1,4 @@
-public class AbstractVehicle implements Vehicle, ElectricVehicle {
+public abstract class AbstractVehicle implements Vehicle, ElectricVehicle {
     private String type;
     private String fuel;
     private String color;
