@@ -53,7 +53,6 @@ public class Task3_4_1 {
         String[] date = new String[1];
         double amount = 0;
 
-
         for (String row : result) {
             if (header) {
                 columnNames = row.split(";");
