@@ -9,7 +9,7 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
-        <module>Module6.1</module>
+        <module>6.1</module>
         <module>6.2</module>
     </modules>
 
