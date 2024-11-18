@@ -34,7 +34,7 @@ public class Dictionary {
             return "Enter a word";
         }
         if (dictionary.containsKey(word)) {
-            return dictionary.get(word);
+            return word + ": " + dictionary.get(word);
         }
         return "The word is not in the dictionary";
     }
