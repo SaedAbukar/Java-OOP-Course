@@ -15,14 +15,18 @@ import javafx.stage.Stage;
 
 public class DictionaryView extends Application {
     private DictionaryController controller;
-    private TextField word = new TextField("Enter a word");
-    private TextField meaning = new TextField("Enter a meaning");
-    private TextField query = new TextField("Enter a query word");
+    private TextField word = new TextField();
+    private TextField meaning = new TextField();
+    private TextField query = new TextField();
     private Label result = new Label("The result should appear here");
 
     public void start(Stage stage) {
         Button submitButton = new Button("Add a word");
         Button searchButton = new Button("Search a word");
+        word.setPromptText("Enter a word");
+        meaning.setPromptText("Enter a meaning");
+        query.setPromptText("Enter a query");
+
         FlowPane pane = new FlowPane();
 
         stage.setTitle("Dictionary");

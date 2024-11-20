@@ -11,6 +11,7 @@
     <modules>
         <module>6.1</module>
         <module>6.2</module>
+        <module>6.3</module>
     </modules>
 
     <properties>
