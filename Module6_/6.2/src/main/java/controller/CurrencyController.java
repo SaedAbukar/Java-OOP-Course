@@ -4,6 +4,7 @@ import model.Currency;
 import view.CurrencyView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class CurrencyController {
     private CurrencyView view;
@@ -23,59 +24,30 @@ public class CurrencyController {
         return currency.getName();
     }
 
-    public double getCurrencyRate(Currency currency) {
-        return currency.getRate();
+    public double getCurrencyRate(String abbreviation) {
+        return Currency.getRate(abbreviation);
     }
 
-    public ArrayList<Currency> getAvailableCurrencies() {
+    public HashMap<String, Double> getAvailableCurrencies() {
         return Currency.getCurrencies();
     }
 
     public ArrayList<String> getAbbreviations() {
-        ArrayList<Currency> currencies = Currency.getCurrencies();
+        HashMap<String, Double> currencies = Currency.getCurrencies();
         ArrayList<String> abbreviations = new ArrayList<>();
-        for (Currency currency : currencies) {
-            abbreviations.add(currency.getAbbreviation());
+        for (String currency : currencies.keySet()) {
+            abbreviations.add(currency);
         }
         return abbreviations;
     }
 
-    public double convertCurrency(String initialCurrencyAbbreviation, String targetCurrencyAbbreviation, double amount) {
-        double rate = 0;
-        double convertedAmount = 0;
-        if (initialCurrencyAbbreviation.equals("USD") && targetCurrencyAbbreviation.equals("USD")) {
-            convertedAmount = amount;
-        }
-        if (initialCurrencyAbbreviation.equals("USD") && targetCurrencyAbbreviation.equals("GBP")) {
-            rate = GBP.getRate();
-            convertedAmount = amount * rate;
-        }
-        if (initialCurrencyAbbreviation.equals("USD") && targetCurrencyAbbreviation.equals("EUR")) {
-            rate = EUR.getRate();
-            convertedAmount = amount * rate;
-        }
-        if (initialCurrencyAbbreviation.equals("GBP") && targetCurrencyAbbreviation.equals("GBP")) {
-            convertedAmount = amount;
-        }
-        if (initialCurrencyAbbreviation.equals("GBP") && targetCurrencyAbbreviation.equals("USD")) {
-            rate = GBP.getRate();
-            convertedAmount = amount / rate;
-        }
-        if (initialCurrencyAbbreviation.equals("GBP") && targetCurrencyAbbreviation.equals("EUR")) {
-            rate = EUR.getRate() / GBP.getRate();
-            convertedAmount = amount * rate;
-        }
-        if (initialCurrencyAbbreviation.equals("EUR") && targetCurrencyAbbreviation.equals("EUR")) {
-            convertedAmount = amount;
-        }
-        if (initialCurrencyAbbreviation.equals("EUR") && targetCurrencyAbbreviation.equals("USD")) {
-            rate = EUR.getRate();
-            convertedAmount = amount / rate;
-        }
-        if (initialCurrencyAbbreviation.equals("EUR") && targetCurrencyAbbreviation.equals("GBP")) {
-            rate = GBP.getRate() / EUR.getRate();
-            convertedAmount = amount * rate;
-        }
-        return convertedAmount;
+    public double convertCurrency(String initialCurrencyAbbreviation, String targetCurrencyAbbreviation, double amount){
+        if (initialCurrencyAbbreviation.equals(targetCurrencyAbbreviation)) {
+            return amount;
+        } else if (initialCurrencyAbbreviation.equals("USD")) {
+            return amount * Currency.getRate(targetCurrencyAbbreviation);
+        } else if (targetCurrencyAbbreviation.equals("USD")) {
+            return amount / Currency.getRate(initialCurrencyAbbreviation);
+        } else return Currency.getRate(targetCurrencyAbbreviation) / Currency.getRate(initialCurrencyAbbreviation);
     }
 }

@@ -1,9 +1,9 @@
 package model;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Currency {
-    private static ArrayList<Currency> currencies = new ArrayList<Currency>();
+    private static HashMap<String, Double> currencies = new HashMap<>();
     private String abbreviation;
     private String name;
     private double rate;
@@ -13,7 +13,7 @@ public class Currency {
         this.abbreviation = abbreviation;
         this.name = name;
         this.rate = rate;
-        currencies.add(this);
+        currencies.put(abbreviation, rate);
     }
 
     public String getAbbreviation() {
@@ -28,7 +28,11 @@ public class Currency {
         return rate;
     }
 
-    public static ArrayList<Currency> getCurrencies() {
+    public static double getRate(String abbreviation) {
+        return currencies.get(abbreviation);
+    }
+
+    public static HashMap<String, Double> getCurrencies() {
         return currencies;
     }
 }
