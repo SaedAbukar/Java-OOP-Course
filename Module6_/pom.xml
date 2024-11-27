@@ -12,6 +12,7 @@
         <module>6.1</module>
         <module>6.2</module>
         <module>6.3</module>
+        <module>6.4</module>
     </modules>
 
     <properties>
