@@ -18,6 +18,7 @@ public class CurrencyView extends Application {
     private Label initialCurrencyLabel = new Label("Initial Currency");
     private Label targetCurrencyLabel = new Label("Target Currency");
     private Label buttonLabel = new Label("Press the button to convert");
+    private Label errorLabel = new Label();
     private TextField initialAmount = new TextField();
     private TextField targetAmount = new TextField();
     private ChoiceBox<String> initialCurrencyChoiceBox = new ChoiceBox<>();
@@ -36,8 +37,15 @@ public class CurrencyView extends Application {
         TilePane container = new TilePane();
         StackPane centerContainer = new StackPane();
         BorderPane layout = new BorderPane();
-        ArrayList<String> abbreviations = currencyController.getAbbreviations();
-        populateTheChoiceBoxes(abbreviations);
+        ArrayList<String> abbreviations;
+        try {
+            abbreviations = currencyController.getAbbreviations();
+            populateTheChoiceBoxes(abbreviations);
+        } catch (Exception e) {
+            String error = currencyController.getErrorMessage();
+            e.printStackTrace();
+            displayError(error);
+        }
         // Create a filter to allow only digits and one decimal point
         TextFormatter<Double> initialAmountFormatter = new TextFormatter<>(new DoubleStringConverter(), 0.0, c ->
                 // Allow digits and one decimal point
@@ -82,6 +90,7 @@ public class CurrencyView extends Application {
         container.getChildren().add(initialAmountAndCurrencyContainer);
         container.getChildren().add(targetAmountAndCurrencyContainer);
         container.getChildren().add(buttonContainer);
+        container.getChildren().add(errorLabel);
 
         Insets insets = new Insets(10, 10, 10, 10);
         container.setMargin(initialAmountAndCurrencyContainer, insets);
@@ -114,9 +123,16 @@ public class CurrencyView extends Application {
                 alert.showAndWait();
                 return; // Stop execution if a selection is missing
             }
-            double amount = Double.parseDouble(initialAmount.getText());
-            double result = currencyController.convertCurrency(initialCurrency, targetCurrency, amount);
-            setResult(result);
+            try {
+                double amount = Double.parseDouble(initialAmount.getText());
+                double result = currencyController.convertCurrency(initialCurrency, targetCurrency, amount);
+                setResult(result);
+            } catch (NumberFormatException ex) {
+                String error = currencyController.getErrorMessage();
+                displayError(error);
+            }
+            String error = currencyController.getErrorMessage();
+            displayError(error);
         });
     }
 
@@ -133,5 +149,15 @@ public class CurrencyView extends Application {
         targetAmount.setText(String.format("%.3f", result));
     }
 
-
+    public void displayError(String error) {
+        if (error != null) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Error");
+            alert.setHeaderText("Database error");
+            alert.setContentText(error);
+            alert.showAndWait();
+        } else {
+            errorLabel.setText("");
+        }
+    }
 }

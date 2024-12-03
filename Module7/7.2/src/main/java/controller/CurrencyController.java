@@ -11,6 +11,7 @@ import java.util.List;
 public class CurrencyController {
     private CurrencyView view;
     private CurrencyDao currencyDao;
+    private String errorMessage;
 
     public CurrencyController(CurrencyView view) {
         this.view = view;
@@ -64,12 +65,11 @@ public class CurrencyController {
         } else
             System.out.println(currencyDao.getExchangeRate(initialCurrencyAbbreviation));
         System.out.println(currencyDao.getExchangeRate(targetCurrencyAbbreviation));
-        return currencyDao.getExchangeRate(targetCurrencyAbbreviation) / currencyDao.getExchangeRate(initialCurrencyAbbreviation);
+        return currencyDao.getExchangeRate(targetCurrencyAbbreviation) / currencyDao.getExchangeRate(initialCurrencyAbbreviation) * amount;
     }
 
-    public static void main(String[] args) {
-        CurrencyController currencyController = new CurrencyController();
-        currencyController.getAbbreviations();
-        currencyController.convertCurrency("EUR", "USD", 1.0);
+    public String getErrorMessage() {
+        errorMessage = currencyDao.getErrorMessage();
+        return errorMessage;
     }
 }
