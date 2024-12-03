@@ -14,13 +14,13 @@ CREATE TABLE CURRENCIES
 -- Populate the table with some example currencies and their exchange rates
 INSERT INTO CURRENCIES (abbreviation, currency_name, exchange_rate)
 VALUES ('USD', 'United States Dollar', 1.0000),
-       ('EUR', 'Euro', 0.9312),
-       ('GBP', 'British Pound', 0.8104),
-       ('JPY', 'Japanese Yen', 146.80),
-       ('AUD', 'Australian Dollar', 1.5202),
-       ('CAD', 'Canadian Dollar', 1.3765),
-       ('CHF', 'Swiss Franc', 0.9251),
-       ('CNY', 'Chinese Yuan', 7.2718);
+       ('EUR', 'Euro', 0.9515),
+       ('GBP', 'British Pound', 0.7891),
+       ('JPY', 'Japanese Yen', 149.60),
+       ('AUD', 'Australian Dollar', 1.5425),
+       ('CAD', 'Canadian Dollar', 1.4067),
+       ('CHF', 'Swiss Franc', 0.8862),
+       ('CNY', 'Chinese Yuan', 7.2853);
 
 -- Drop the user account 'appuser' if it exists
 DROP USER IF EXISTS 'saed'@'localhost';
