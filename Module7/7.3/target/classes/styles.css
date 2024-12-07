@@ -1,0 +1,61 @@
+/* Apply general styling for the entire scene */
+.root {
+    -fx-background-color: #f7f0d4; /* Warm cream background */
+}
+
+/* Styling for Labels */
+.label {
+    -fx-font-size: 16px;
+    -fx-font-family: 'Arial', sans-serif; /* Updated to sans-serif */
+    -fx-text-fill: #5a3e36; /* Warm brown text */
+}
+
+/* Styling for TextFields */
+.text-field {
+    -fx-background-color: #fff7e1; /* Light warm background */
+    -fx-border-color: #c69f59; /* Border matching the warm theme */
+    -fx-border-radius: 5px;
+    -fx-padding: 5px;
+    -fx-font-size: 14px;
+    -fx-font-family: 'Arial', sans-serif; /* Updated to sans-serif */
+}
+
+/* Styling for ChoiceBoxes */
+.choice-box {
+    -fx-background-color: #fff7e1; /* Light warm background */
+    -fx-border-color: #c69f59;
+    -fx-border-radius: 5px;
+    -fx-font-size: 14px;
+    -fx-font-family: 'Arial', sans-serif; /* Updated to sans-serif */
+}
+
+/* Styling for the Convert Button */
+.button {
+    -fx-background-color: #c69f59; /* Warm gold */
+    -fx-text-fill: #ffffff; /* White text */
+    -fx-font-size: 16px;
+    -fx-font-family: 'Arial', sans-serif; /* Updated to sans-serif */
+    -fx-border-radius: 10px;
+    -fx-padding: 8px 20px;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: #b8864f; /* Slightly darker on hover */
+}
+
+/* Styling for containers */
+.hbox, .vbox, .tile-pane, .stack-pane, .border-pane {
+    -fx-spacing: 10px; /* Uniform spacing */
+}
+
+.tile-pane {
+    -fx-background-radius: 10px;
+}
+
+/* Custom styling for message label */
+.button-label {
+    -fx-font-size: 14px;
+    -fx-font-family: 'Arial', sans-serif; /* Updated to sans-serif */
+    -fx-text-fill: #5a3e36; /* Warm brown */
+}

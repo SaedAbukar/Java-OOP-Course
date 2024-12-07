@@ -29,7 +29,7 @@ DROP USER IF EXISTS 'saed'@'localhost';
 CREATE USER 'saed'@'localhost' IDENTIFIED BY '12345678';
 
 -- Grant appropriate privileges to 'appuser'
-GRANT SELECT, INSERT, UPDATE, DELETE ON currency_db.* TO 'saed'@'localhost';
+GRANT SELECT, INSERT, UPDATE, DELETE, CREATE ON currency_db.* TO 'saed'@'localhost';
 
 -- Flush privileges to apply the changes
 FLUSH PRIVILEGES;
