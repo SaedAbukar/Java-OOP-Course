@@ -128,6 +128,13 @@ public class CurrencyView extends Application {
             Stage newStage = new Stage();
             HBox newCurrencyContainer = new HBox();
             VBox newCurrency = new VBox();
+
+            newCurrencyAbbr.clear();
+            newCurrencyName.clear();
+
+            newCurrencyAbbr.setPromptText("Enter currency abbreviation");
+            newCurrencyName.setPromptText("Enter currency name");
+
             newCurrencyContainer.getChildren().addAll(newCurrencyAbbr, newCurrencyName, newCurrencyExchangeRate, addCurrency);
             newCurrency.getChildren().addAll(newCurrencyLabel, newCurrencyContainer);
 
@@ -142,18 +149,16 @@ public class CurrencyView extends Application {
             newStage.setTitle("Currency Converter");
             newStage.showAndWait();
 
-            newCurrencyAbbr.setPromptText("Enter currency abbreviation");
-            newCurrencyName.setPromptText("Enter currency name");
-            newCurrencyExchangeRate.setPromptText("Enter currency exchange rate");
+            updateCurrencyChoices();
         });
 
         addCurrency.setOnAction(event -> {
             System.out.println("Add currency");
             String abb = newCurrencyAbbr.getText();
             String name = newCurrencyName.getText();
-            double exchangeRate = Double.parseDouble(newCurrencyExchangeRate.getText());
+            String exchangeRate = newCurrencyExchangeRate.getText();
             // Check if either currency is null
-            if (abb == null || name == null || exchangeRate < 0) {
+            if (abb.isEmpty() || name.isEmpty() || exchangeRate == null) {
                 // Display an alert to the user
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Insertion Error");
@@ -163,6 +168,7 @@ public class CurrencyView extends Application {
                 return; // Stop execution if a selection is missing
             }
             abb = abb.toUpperCase();
+            double exc_rate = Double.parseDouble(exchangeRate);
             if (initialCurrencyChoiceBox.getItems().contains(abb)) {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Duplicate Error");
@@ -173,7 +179,7 @@ public class CurrencyView extends Application {
             }
 
             try {
-                Currency result = currencyController.createCurrency(abb, name, exchangeRate);
+                Currency result = currencyController.createCurrency(abb, name, exc_rate);
                 currencyController.persistCurrency(result);
             } catch (NumberFormatException ex) {
                 String error = currencyController.getErrorMessage();
@@ -233,4 +239,21 @@ public class CurrencyView extends Application {
             errorLabel.setText("");
         }
     }
+
+    public void updateCurrencyChoices() {
+        try {
+            // Fetch updated abbreviations from the controller
+            ArrayList<String> updatedAbbreviations = currencyController.getAbbreviations();
+
+            // Clear the current items and repopulate the choice boxes
+            initialCurrencyChoiceBox.getItems().clear();
+            targetCurrencyChoiceBox.getItems().clear();
+            populateTheChoiceBoxes(updatedAbbreviations);
+        } catch (Exception e) {
+            String error = currencyController.getErrorMessage();
+            e.printStackTrace();
+            displayError(error);
+        }
+    }
+
 }
