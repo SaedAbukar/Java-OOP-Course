@@ -1,7 +1,9 @@
 package controller;
 
 import dao.CurrencyDao;
+import dao.TransactionDao;
 import entity.Currency;
+import entity.Transaction;
 import view.CurrencyView;
 
 import java.util.ArrayList;
@@ -10,11 +12,13 @@ import java.util.List;
 public class CurrencyController {
     private CurrencyView view;
     private CurrencyDao currencyDao;
+    private TransactionDao transactionDao;
     private String errorMessage;
 
     public CurrencyController(CurrencyView view) {
         this.view = view;
         this.currencyDao = new CurrencyDao();
+        this.transactionDao = new TransactionDao();
     }
 
     public CurrencyController() {
@@ -37,8 +41,28 @@ public class CurrencyController {
         return new Currency(abbreviation, currencyName, exchangeRate);
     }
 
+    public Transaction createTransaction(double amount, Currency initialCurrency, Currency targetCurrency) {
+        return new Transaction(amount, initialCurrency, targetCurrency);
+    }
+
     public void persistCurrency(Currency currency) {
         currencyDao.persist(currency);
+    }
+
+    public void persistTransaction(Transaction transaction) {
+        transactionDao.persist(transaction);
+    }
+
+    public Currency getCurrency(String abbreviation) {
+        List<Currency> currencyList = currencyDao.findAll();
+        Currency targetCurrency = null;
+        for (Currency currency : currencyList) {
+            if (currency.getAbbreviation().equals(abbreviation)) {
+                targetCurrency = currency;
+                break;
+            }
+        }
+        return targetCurrency;
     }
 
     public Double getExchangeRate(String abbreviation) {

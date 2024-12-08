@@ -2,6 +2,7 @@ package view;
 
 import controller.CurrencyController;
 import entity.Currency;
+import entity.Transaction;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -205,6 +206,10 @@ public class CurrencyView extends Application {
             try {
                 double amount = Double.parseDouble(initialAmount.getText());
                 double result = currencyController.convertCurrency(initialCurrency, targetCurrency, amount);
+                Currency source = currencyController.getCurrency(initialCurrency);
+                Currency target = currencyController.getCurrency(targetCurrency);
+                Transaction transaction = currencyController.createTransaction(result, source, target);
+                currencyController.persistTransaction(transaction);
                 setResult(result);
             } catch (NumberFormatException ex) {
                 String error = currencyController.getErrorMessage();
